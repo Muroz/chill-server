@@ -27,9 +27,7 @@ const typeDefs = `#graphql
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
-  Query: {
-    books: () => prisma.book.findMany(),
-  },
+  Query: {},
 };
 
 // The ApolloServer constructor requires two parameters: your schema
@@ -48,3 +46,5 @@ const { url } = await startStandaloneServer(server, {
 });
 
 console.log(`🚀  Server ready at: ${url}`);
+
+// Next steps, figure out how to connect this to the block app
