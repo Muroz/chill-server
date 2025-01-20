@@ -1,0 +1,17 @@
+model Recipe {
+    id          Int      @id @default(autoincrement())
+    title       String
+    content     String?
+    author      User     @relation(fields: [authorId], references: [id])
+    authorId    Int
+    blocks      Block[]
+    description String
+    tags        String[]
+    version     String
+    package     String
+    action      String
+
+    // TODO Set constraint for unique combination of version, package and action
+    // TODO Define relations inbetween Recipes
+    // comments Comment[]
+}

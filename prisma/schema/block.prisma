@@ -1,0 +1,19 @@
+enum BlockTypes {
+    TEXT
+    IMAGE
+    VIDEO
+    CODE
+    QUOTE
+    RECIPE
+}
+
+model Block {
+    id            Int         @id @default(autoincrement())
+    postContent   PostContent @relation(fields: [postContentId], references: [id])
+    postContentId Int
+    type          BlockTypes
+    content       String
+    recipe        Recipe?     @relation(fields: [recipeId], references: [id])
+    recipeId      Int?
+    // comments Comment[]
+}
