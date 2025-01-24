@@ -1,4 +1,4 @@
-model PostContent {
+model PostLocalization {
     id       Int     @id @default(autoincrement())
     post     Post    @relation(fields: [postId], references: [id])
     postId   Int

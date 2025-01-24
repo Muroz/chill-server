@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc",
     "build": "webpack --config webpack.config.js",
-    "start": "npm run compile && node ./dist/index.js"
+    "start": "npm run build && node ./dist/server.js",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "reset:db": "prisma migrate reset"
   },
   "keywords": [],
   "author": "",

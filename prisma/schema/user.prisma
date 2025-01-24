@@ -3,6 +3,6 @@ model User {
     email        String        @unique
     name         String?
     posts        Post[]
-    translations PostContent[]
+    translations PostLocalization[]
     recipes      Recipe[]
 }

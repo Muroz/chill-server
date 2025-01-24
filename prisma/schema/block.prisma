@@ -9,7 +9,7 @@ enum BlockTypes {
 
 model Block {
     id            Int         @id @default(autoincrement())
-    postContent   PostContent @relation(fields: [postContentId], references: [id])
+    postContent   PostLocalization @relation(fields: [postContentId], references: [id])
     postContentId Int
     type          BlockTypes
     content       String

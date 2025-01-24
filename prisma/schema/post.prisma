@@ -4,5 +4,5 @@ model Post {
     authorId   Int
     tags       String[]
     categories Category[]
-    content    PostContent[]
+    content    PostLocalization[]
 }
