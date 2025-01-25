@@ -1,0 +1,14 @@
+model PostLocalization {
+    id       Int     @id @default(autoincrement())
+    post     Post    @relation(fields: [postId], references: [id])
+    postId   Int
+    title    String
+    content  Block[]
+    summary  String
+    author   User    @relation(fields: [authorId], references: [id])
+    authorId Int
+    locale   String
+    // comments Comment[]
+
+    @@index([postId, locale])
+}
