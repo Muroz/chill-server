@@ -7,7 +7,7 @@ builder.prismaObject("PostLocalization", {
     post: t.relation("post"),
     postId: t.exposeInt("postId"),
     title: t.exposeString("title"),
-    // content: t.relation("content"),
+    content: t.relation("content"),
     summary: t.exposeString("summary"),
     author: t.relation("author"),
     authorId: t.exposeInt("authorId"),

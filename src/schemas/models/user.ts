@@ -11,7 +11,7 @@ builder.prismaObject("User", {
     name: t.exposeString("name"),
     posts: t.relation("posts"),
     translations: t.relation("translations"),
-    // recipes: t.relation("recipes"),
+    recipes: t.relation("recipes"),
   }),
 });
 
