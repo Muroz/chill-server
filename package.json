@@ -8,7 +8,9 @@
     "start": "npm run build && node ./dist/server.js",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
-    "reset:db": "prisma migrate reset"
+    "reset:db": "prisma migrate reset",
+    "lint": "eslint . --fix",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,13 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.3",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.4.2",
     "prisma": "^6.2.1",
     "source-map-support": "^0.5.21",
     "ts-loader": "^9.5.2",
