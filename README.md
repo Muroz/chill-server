@@ -41,12 +41,13 @@ The server should now be running at `http://localhost:4000`.
 ### Snippets
 
 #### Manually running mutations
+
 ```ts
 async function main() {
   await prisma.book.create({
     data: {
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
+      title: 'The Great Gatsby',
+      author: 'F. Scott Fitzgerald',
     },
   });
 }

@@ -5,10 +5,20 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "npm run build && node ./dist/server.js",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
-    "reset:db": "prisma migrate reset"
+    "reset:db": "prisma migrate reset",
+    "lint": "eslint . --fix",
+    "format": "prettier --write .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*": [
+      "npm run lint",
+      "npm run format"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -19,11 +29,23 @@
     "@pothos/plugin-prisma": "^4.4.0",
     "@prisma/client": "^6.2.1",
     "apollo-server": "^3.13.0",
+    "globals": "^15.14.0",
     "graphql": "^16.10.0",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.3",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^6.2.1",
     "source-map-support": "^0.5.21",
     "ts-loader": "^9.5.2",

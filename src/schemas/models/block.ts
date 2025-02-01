@@ -1,29 +1,29 @@
-import { builder } from "../builder";
-import prisma from "../client";
+import { builder } from '../builder';
+import prisma from '../client';
 
-const blockTypes = builder.enumType("BlockTypes", {
-  values: ["TEXT", "IMAGE", "VIDEO", "CODE", "QUOTE", "RECIPE"],
+const blockTypes = builder.enumType('BlockTypes', {
+  values: ['TEXT', 'IMAGE', 'VIDEO', 'CODE', 'QUOTE', 'RECIPE'],
 });
 
-builder.prismaObject("Block", {
+builder.prismaObject('Block', {
   fields: (t) => ({
-    id: t.exposeInt("id"),
-    postLocalization: t.relation("postLocalization"),
-    postLocalizationId: t.exposeInt("postLocalizationId"),
-    type: t.expose("type", { type: blockTypes }),
-    content: t.exposeString("content"),
-    recipe: t.relation("recipe", { nullable: true }),
-    recipeId: t.exposeInt("recipeId", { nullable: true }),
+    id: t.exposeInt('id'),
+    postLocalization: t.relation('postLocalization'),
+    postLocalizationId: t.exposeInt('postLocalizationId'),
+    type: t.expose('type', { type: blockTypes }),
+    content: t.exposeString('content'),
+    recipe: t.relation('recipe', { nullable: true }),
+    recipeId: t.exposeInt('recipeId', { nullable: true }),
   }),
 });
 
 builder.queryFields((t) => ({
   block: t.prismaField({
-    type: "Block",
+    type: 'Block',
     args: {
       id: t.arg.int({ required: true }),
     },
-    resolve: (query, _parent, args, _context, _info) => {
+    resolve: (query, _parent, args) => {
       return prisma.block.findUnique({
         ...query,
         where: { id: args.id },
@@ -31,17 +31,17 @@ builder.queryFields((t) => ({
     },
   }),
   blocks: t.prismaField({
-    type: ["Block"],
-    resolve: (query, _parent, _args, _context, _info) => {
+    type: ['Block'],
+    resolve: (query) => {
       return prisma.block.findMany({ ...query });
     },
   }),
   blocksByPost: t.prismaField({
-    type: ["Block"],
+    type: ['Block'],
     args: {
       postLocalizationId: t.arg.int({ required: true }),
     },
-    resolve: (query, _parent, { postLocalizationId }, _context, _info) => {
+    resolve: (query, _parent, { postLocalizationId }) => {
       return prisma.block.findMany({
         ...query,
         where: { postLocalizationId },
@@ -52,7 +52,7 @@ builder.queryFields((t) => ({
 
 builder.mutationFields((t) => ({
   createBlock: t.prismaField({
-    type: "Block",
+    type: 'Block',
     args: {
       postLocalizationId: t.arg.int({ required: true }),
       type: t.arg({ type: blockTypes, required: true }),
@@ -62,9 +62,7 @@ builder.mutationFields((t) => ({
     resolve: (
       query,
       _parent,
-      { postLocalizationId, type, content, recipeId },
-      _context,
-      _info
+      { postLocalizationId, type, content, recipeId }
     ) => {
       return prisma.block.create({
         ...query,
@@ -78,7 +76,7 @@ builder.mutationFields((t) => ({
     },
   }),
   updateBlock: t.prismaField({
-    type: "Block",
+    type: 'Block',
     args: {
       id: t.arg.int({ required: true }),
       postLocalizationId: t.arg.int(),
@@ -89,9 +87,7 @@ builder.mutationFields((t) => ({
     resolve: (
       query,
       _parent,
-      { id, postLocalizationId, type, content, recipeId },
-      _context,
-      _info
+      { id, postLocalizationId, type, content, recipeId }
     ) => {
       return prisma.block.update({
         ...query,
@@ -106,11 +102,11 @@ builder.mutationFields((t) => ({
     },
   }),
   deleteBlock: t.prismaField({
-    type: "Block",
+    type: 'Block',
     args: {
       id: t.arg.int({ required: true }),
     },
-    resolve: (query, _parent, { id }, _context, _info) => {
+    resolve: (query, _parent, { id }) => {
       return prisma.block.delete({
         ...query,
         where: { id },

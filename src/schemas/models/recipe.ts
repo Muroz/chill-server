@@ -1,44 +1,44 @@
-import { builder } from "../builder";
-import prisma from "../client";
+import { builder } from '../builder';
+import prisma from '../client';
 
-builder.prismaObject("Recipe", {
+builder.prismaObject('Recipe', {
   fields: (t) => ({
-    id: t.exposeInt("id"),
-    title: t.exposeString("title"),
-    content: t.exposeString("content"),
-    author: t.relation("author"),
-    authorId: t.exposeInt("authorId"),
-    blocks: t.relation("blocks"),
-    description: t.exposeString("description"),
-    tags: t.exposeStringList("tags"),
-    version: t.exposeString("version"),
-    packageLink: t.exposeString("packageLink"),
-    packageName: t.exposeString("packageName"),
-    action: t.exposeString("action"),
+    id: t.exposeInt('id'),
+    title: t.exposeString('title'),
+    content: t.exposeString('content'),
+    author: t.relation('author'),
+    authorId: t.exposeInt('authorId'),
+    blocks: t.relation('blocks'),
+    description: t.exposeString('description'),
+    tags: t.exposeStringList('tags'),
+    version: t.exposeString('version'),
+    packageLink: t.exposeString('packageLink'),
+    packageName: t.exposeString('packageName'),
+    action: t.exposeString('action'),
   }),
 });
 
 builder.queryFields((t) => ({
   recipe: t.prismaField({
-    type: "Recipe",
+    type: 'Recipe',
     args: {
       id: t.arg.int({ required: true }),
     },
-    resolve: (query, _parent, { id }, _context, _info) =>
+    resolve: (query, _parent, { id }) =>
       prisma.recipe.findUnique({
         ...query,
         where: { id },
       }),
   }),
   recipes: t.prismaField({
-    type: ["Recipe"],
+    type: ['Recipe'],
     resolve: (query) => prisma.recipe.findMany({ ...query }),
   }),
 }));
 
 builder.mutationFields((t) => ({
   createRecipe: t.prismaField({
-    type: "Recipe",
+    type: 'Recipe',
     args: {
       title: t.arg.string({ required: true }),
       content: t.arg.string({ required: true }),
@@ -63,9 +63,7 @@ builder.mutationFields((t) => ({
         packageLink,
         packageName,
         action,
-      },
-      _context,
-      _info
+      }
     ) =>
       prisma.recipe.create({
         ...mutation,
@@ -83,7 +81,7 @@ builder.mutationFields((t) => ({
       }),
   }),
   updateRecipe: t.prismaField({
-    type: "Recipe",
+    type: 'Recipe',
     args: {
       id: t.arg.int({ required: true }),
       title: t.arg.string(),
@@ -108,9 +106,7 @@ builder.mutationFields((t) => ({
         packageLink,
         packageName,
         action,
-      },
-      _context,
-      _info
+      }
     ) =>
       prisma.recipe.update({
         ...mutation,
@@ -128,11 +124,11 @@ builder.mutationFields((t) => ({
       }),
   }),
   deleteRecipe: t.prismaField({
-    type: "Recipe",
+    type: 'Recipe',
     args: {
       id: t.arg.int({ required: true }),
     },
-    resolve: (mutation, _parent, { id }, _context, _info) =>
+    resolve: (mutation, _parent, { id }) =>
       prisma.recipe.delete({
         ...mutation,
         where: { id },
