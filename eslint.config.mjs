@@ -3,6 +3,7 @@ import ts from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import prettier from 'eslint-config-prettier';
 import pluginPrettier from 'eslint-plugin-prettier';
+import globals from 'globals';
 
 export default [
   {
@@ -19,6 +20,9 @@ export default [
     files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
+      globals: {
+        ...globals.node
+      },
       parserOptions: {
         project: './tsconfig.json',
       },
@@ -30,7 +34,6 @@ export default [
     rules: {
       'prettier/prettier': 'error',
       'no-console': 'error',
-      'no-unused-vars': 'error',
       'no-undef': 'error',
       eqeqeq: 'error',
       '@typescript-eslint/no-unused-vars': [

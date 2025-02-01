@@ -21,6 +21,7 @@
     "@pothos/plugin-prisma": "^4.4.0",
     "@prisma/client": "^6.2.1",
     "apollo-server": "^3.13.0",
+    "globals": "^15.14.0",
     "graphql": "^16.10.0",
     "reflect-metadata": "^0.2.2"
   },

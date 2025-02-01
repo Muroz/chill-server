@@ -1,23 +1,23 @@
-import { builder } from "../builder";
-import prisma from "../client";
-import { formatSlug } from "../utils/strings";
+import { builder } from '../builder';
+import prisma from '../client';
+import { formatSlug } from '../utils/strings';
 
-builder.prismaObject("Category", {
+builder.prismaObject('Category', {
   fields: (t) => ({
-    id: t.exposeInt("id"),
-    slug: t.exposeString("slug"),
-    posts: t.relation("posts"),
-    label: t.exposeString("label"),
+    id: t.exposeInt('id'),
+    slug: t.exposeString('slug'),
+    posts: t.relation('posts'),
+    label: t.exposeString('label'),
   }),
 });
 
 builder.queryFields((t) => ({
   category: t.prismaField({
-    type: "Category",
+    type: 'Category',
     args: {
       id: t.arg.int({ required: true }),
     },
-    resolve: (query, _parent, args, ctx) => {
+    resolve: (query, _parent, args) => {
       return prisma.category.findUnique({
         where: { id: args.id },
         ...query,
@@ -25,8 +25,8 @@ builder.queryFields((t) => ({
     },
   }),
   categories: t.prismaField({
-    type: ["Category"],
-    resolve: (query, _parent, _args, ctx) => {
+    type: ['Category'],
+    resolve: (query) => {
       return prisma.category.findMany({
         ...query,
       });
@@ -36,12 +36,12 @@ builder.queryFields((t) => ({
 
 builder.mutationFields((t) => ({
   createCategory: t.prismaField({
-    type: "Category",
+    type: 'Category',
     args: {
       slug: t.arg.string(),
       label: t.arg.string({ required: true }),
     },
-    resolve: (query, _parent, { slug, label }, ctx) => {
+    resolve: (query, _parent, { slug, label }) => {
       const slugValue = slug ?? formatSlug(label);
       return prisma.category.create({
         ...query,
@@ -53,13 +53,13 @@ builder.mutationFields((t) => ({
     },
   }),
   updateCategory: t.prismaField({
-    type: "Category",
+    type: 'Category',
     args: {
       id: t.arg.int({ required: true }),
       slug: t.arg.string(),
       label: t.arg.string(),
     },
-    resolve: (query, _parent, { slug, label, id }, ctx) => {
+    resolve: (query, _parent, { slug, label, id }) => {
       return prisma.category.update({
         where: { id },
         data: {
@@ -71,11 +71,11 @@ builder.mutationFields((t) => ({
     },
   }),
   deleteCategory: t.prismaField({
-    type: "Category",
+    type: 'Category',
     args: {
       id: t.arg.int({ required: true }),
     },
-    resolve: (query, _parent, { id }, ctx) => {
+    resolve: (query, _parent, { id }) => {
       return prisma.category.delete({
         where: { id },
         ...query,
