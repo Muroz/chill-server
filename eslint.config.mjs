@@ -21,7 +21,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       globals: {
-        ...globals.node
+        ...globals.node,
       },
       parserOptions: {
         project: './tsconfig.json',
