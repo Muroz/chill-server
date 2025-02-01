@@ -10,7 +10,8 @@
     "migrate": "prisma migrate dev",
     "reset:db": "prisma migrate reset",
     "lint": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-prettier": "^5.2.3",
+    "husky": "^9.1.7",
     "prettier": "^3.4.2",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^6.2.1",
